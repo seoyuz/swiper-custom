@@ -21,33 +21,11 @@ $(document).ready(function(){
                 prevEl: ".swiper-container .swiper-button-prev",
             },
             on: {
-                // event
-                init: function () {
-
-                    // document.querySelectorAll(".swiper-slide").classList.add("active");
-
-
-                    // if (tabMenu[i].classList.contains("active")){
-                                    
-                    //     console.log('swiper initialized');
-                    // }
-
-
-                    // if (document.querySelectorAll(".swiper-slide").contains(".swiper-slide-active")) {
-                    // // if ($(".swiper-slide").hasClass("swiper-slide-active")) {
-        
-                    //     console.log('swiper initialized');
-                    // }
-
-
-
-
-                    if (Array.from(document.querySelectorAll(".tab-content.active .swiper-container .swiper-slide")).some(slide => slide.classList.contains("swiper-slide-active"))) {
-
-                        // 실행할 코드
-                        console.log('swiper initialized');
-                    }
-                    
+                init: function () { // 처음 진입 시 
+                    updateSlides();
+                },
+                transitionEnd: function () {  // 슬라이드 변경 이후 실행
+                    updateSlides();
                 },
             },
         });
@@ -55,6 +33,36 @@ $(document).ready(function(){
     }
 
 
+    // 현재 슬라이드 tab 이동
+    function updateSlides() {
+        document.querySelectorAll(".tab-content.active .swiper-container").forEach(function (elem) {
+            const slideAll = elem.querySelectorAll(".swiper-slide");
+            // const slideActive = elem.querySelector(".swiper-slide-active");
+    
+            slideAll.forEach(function (slide) {
+                slide.removeAttribute("role"); // 초기 진입 시 슬라이드 role 삭제 (웹 접근성 이슈)
+              
+                if (slide.querySelector("a")) { // a태그 여부 검사
+
+                    if (slide.classList.contains("swiper-slide-active")) { // slide-active 여부 검사
+
+                        // swiper slide active가 있을 때
+                        slide.querySelector("a").setAttribute("tabindex", "0"); // a 태그에 tabindex 설정
+                    } else {
+
+                        // 그 외 경우에는 tabindex -1로 포커스 이동이 안 되도록 설정
+                        slide.querySelector("a").setAttribute("tabindex", "-1");
+                    }
+                }
+
+            });
+
+            // console.log(slideAll);
+        });
+    }
+
+
+    // 탭메뉴
     tabMenu.forEach((item, i) => {
         item.addEventListener("click", () => {
             // active된 탭메뉴를 누르면 슬라이드가 초기화 되지 않게끔 
