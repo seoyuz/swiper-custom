@@ -1,0 +1,83 @@
+.tab {
+  position: relative;
+  margin: 50px auto;
+  width: 800px;
+  overflow: hidden;
+}
+
+.tab-list { 
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  font-size: 0;
+}
+.tab-list .tab-menu {
+  display: inline-block;
+  padding: 5px 10px;
+  border: 1px solid red;
+  border-radius: 5px 5px 0 0;
+  font-size: 18px;
+}
+.tab-list .tab-menu.active {
+  padding: 10px 20px;
+  background-color: red;
+  color: #fff;
+  vertical-align: bottom;
+}
+
+.tab-container {
+  width: 600px;
+  height: 150px;
+  border: 1px solid red;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tab-content {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+.tab-content.active {
+  display: block;
+  box-sizing: border-box;
+}
+.tab-content .swiper-slide {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 150px;
+}
+.tab-content .swiper-slide.slide1 {
+  background-color: beige;
+}
+.tab-content .swiper-slide.slide2 {
+  background-color: azure;
+}
+.tab-content .swiper-slide.slide3 {
+  background-color: darkgray;
+}
+
+.button-wrap {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 150px;
+  height: 100px;
+}
+.button-wrap .swiper-button-prev {
+  position: absolute;
+}
+.button-wrap .swiper-button-prev ::after {
+  height: 20px;
+}
+.button-wrap .swiper-button-next {
+  position: absolute;
+}
+.button-wrap .swiper-button-next ::after {
+  height: 20px;
+}
+.button-wrap .swiper-button-next, .button-wrap .swiper-button-prev {
+  color: red;
+}
